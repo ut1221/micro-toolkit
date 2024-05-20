@@ -2,7 +2,13 @@ module github.com/ut1221/micro-toolkit
 
 go 1.22.1
 
-require github.com/zeromicro/go-zero v1.6.5
+require (
+	github.com/bwmarrin/snowflake v0.3.0
+	github.com/golang-jwt/jwt/v4 v4.5.0
+	github.com/google/uuid v1.6.0
+	github.com/zeromicro/go-zero v1.6.5
+	golang.org/x/crypto v0.23.0
+)
 
 require (
 	github.com/fatih/color v1.16.0 // indirect

@@ -43,7 +43,7 @@ func Response(w http.ResponseWriter, resp interface{}, err error) {
 
 		default: //系统未知错误
 
-			body.Code = 1
+			body.Code = 100
 
 			body.Message = err.Error()
 		}
@@ -52,7 +52,7 @@ func Response(w http.ResponseWriter, resp interface{}, err error) {
 
 		body.Code = 200
 
-		body.Message = "请求成功!"
+		body.Message = "操作成功"
 
 		body.Data = resp
 
