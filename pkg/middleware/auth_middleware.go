@@ -9,6 +9,7 @@ import (
 	"github.com/ut1221/micro-toolkit/utils"
 	"github.com/zeromicro/go-zero/rest"
 	"net/http"
+	"strings"
 )
 
 type AuthMiddleware struct {
@@ -28,7 +29,15 @@ func (m *AuthMiddleware) Handle() rest.Middleware {
 				_, _ = w.Write(marshal)
 				return
 			}
-			claim, err := utils.AnalyseToken(r.Header.Get(constants.Authorization), define.JwtSecret)
+			t := strings.Split(r.Header.Get(constants.Authorization), " ")
+			if t[0] != constants.Bearer {
+				w.WriteHeader(http.StatusOK)
+				body := response.Body{Code: http.StatusUnauthorized, Message: constants.TokenInvalid}
+				marshal, _ := json.Marshal(body)
+				_, _ = w.Write(marshal)
+				return
+			}
+			claim, err := utils.AnalyseToken(t[1], define.JwtSecret)
 			if err != nil {
 				w.WriteHeader(http.StatusOK)
 				body := response.Body{Code: http.StatusUnauthorized, Message: constants.TokenInvalid}

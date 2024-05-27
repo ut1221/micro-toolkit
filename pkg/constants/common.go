@@ -11,6 +11,7 @@ const (
 	PermissionDelimeter = ","
 	// Authorization 授权请求头
 	Authorization = "Authorization"
+	Bearer        = "Bearer"
 	// UserCache 用户信息
 	UserCache = "User-Cache"
 )
